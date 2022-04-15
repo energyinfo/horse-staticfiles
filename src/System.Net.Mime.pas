@@ -1905,7 +1905,7 @@ begin
           if LName = 'q' then
             LWeight := StrToFloatDef(LValue, 0, FInvariant)
           else if LValue <> '' then
-            LExtra.AddPair(LName, LValue)
+            LExtra.Add(LName + '=' + LValue)
           else
             LExtra.Add(LName);
         end;
