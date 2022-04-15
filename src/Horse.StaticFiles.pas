@@ -37,7 +37,7 @@ type
     class property DefaultManager: THorseStaticFileManager read GetDefaultManager;
   end;
 
-function HorseStaticFile(APathRoot: string; const ADefaultFiles: TArray<string> = []): THorseCallback; overload;
+function HorseStaticFile(APathRoot: string; const ADefaultFiles: TArray<string>): THorseCallback; overload;
 
 implementation
 
@@ -45,7 +45,7 @@ uses
   System.IOUtils,
   System.Net.Mime;
 
-function HorseStaticFile(APathRoot: string; const ADefaultFiles: TArray<string> = []): THorseCallback; overload;
+function HorseStaticFile(APathRoot: string; const ADefaultFiles: TArray<string>): THorseCallback; overload;
 var
   LHorseStaticFileCallback: THorseStaticFileCallback;
 begin
@@ -70,11 +70,11 @@ var
   LFileStream: TFileStream;
   LNormalizeFileName: string;
   LType: string;
-  LKind: TMimeTypes.TKind;
+  LKind: System.Net.Mime.TMimeTypes.TKind;
   I: Integer;
 begin
 
-  LNormalizeFileName := AHorseRequest.RawWebRequest.RawPathInfo.TrimLeft(['/']);
+  LNormalizeFileName := String(AHorseRequest.RawWebRequest.RawPathInfo).TrimLeft(['/']);
 
   LNormalizeFileName := LNormalizeFileName.Replace('/', TPath.DirectorySeparatorChar);
 
